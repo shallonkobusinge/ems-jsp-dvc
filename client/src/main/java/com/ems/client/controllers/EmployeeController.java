@@ -77,7 +77,7 @@ public class EmployeeController {
     @GetMapping("/delete")
     public String delete(Long id,HttpServletRequest request){
         RestTemplate restTemplate = new RestTemplate();
-        String URL = "http://localhost:6000/employees/{id}";
+        String URL = "http://localhost:8080/api/v1/employees/{id}";
         restTemplate.delete(URL,request.getParameter("id"));
         return "redirect:/employees/all";
     }
@@ -85,7 +85,7 @@ public class EmployeeController {
     @GetMapping("one")
     public String getSingle(HttpServletRequest request,Model model){
         RestTemplate restTemplate = new RestTemplate();
-        String URL = "http://localhost:6000/employees/{id}";
+        String URL = "http://localhost:8080/api/v1/employees/{id}";
         Employee employee = restTemplate.getForObject(URL,Employee.class,request.getParameter("id"));
         model.addAttribute("employee",employee);
         return "EditForm";
