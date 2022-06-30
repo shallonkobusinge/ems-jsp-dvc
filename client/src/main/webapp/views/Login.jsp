@@ -66,18 +66,23 @@
 </head>
 <body>
 <jsp:include page="components/Navbar.jsp"></jsp:include>
-<div class="form-container">
-    <h2>Login</h2>
-    <div class="form-container-sub">
-        <label>Username</label>
-        <input type="text" name="username" id="username" >
-    </div>
-    <div class="form-container-sub">
-        <label>Password</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <button>Submit</button>
 
-</div>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+
+        <div class="form-container-sub">
+            <label>Username/Email/Phone</label>
+            <input type="text" name="login" id="username" >
+        </div>
+        <div class="form-container-sub">
+            <label>Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <button>Submit</button>
+        </form>
+    </div>
+
+
 </body>
 </html>

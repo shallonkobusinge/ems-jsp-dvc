@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,24 @@ public class UserServiceImpl implements IUserService {
     public User findByUserNameOrEmail(String username, String email) {
         return userRepository.findByUsernameAndEmail(username, email).orElseThrow(()-> new ResourceNotFoundException("User with username " + username + " or email " + email + " already exists"));
     }
+
+    @Override
+    public User profile() {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() == "anonymousUser")
+            throw new ResourceNotFoundException("You are not logged in, try to log in");
+
+        String email;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            email = ((UserDetails) principal).getUsername();
+        } else {
+            email = principal.toString();
+        }
+        return userRepository.findByUsernameOrEmailOrPhone(email,email, email).orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+
+    }
+
     @Override
     public User save(CreateOrUpdateUserDTO user) {
         User saved = new User(user);

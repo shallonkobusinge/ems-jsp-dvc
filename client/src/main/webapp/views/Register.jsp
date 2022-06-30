@@ -68,6 +68,18 @@
             margin-top: 20px;
             cursor: pointer;
         }
+     .register-employee-container-sub{
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+
+     }
+        .register-employee-container-sub select{
+            width: 18rem;
+            height: 2rem;
+            padding-left: 10px;
+            margin-top: 15px;
+        }
 
     </style>
 </head>
@@ -107,6 +119,13 @@
             <input type="password" name="password" id="password">
         </div>
     </div>
+        <div class="register-employee-container-sub">
+            <label>ROLE</label>
+            <select name="role">
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+            </select>
+        </div>
     <button>Submit</button>
     </form>
 </div>

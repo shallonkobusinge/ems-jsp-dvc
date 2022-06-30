@@ -1,5 +1,7 @@
 package com.ems.client.dtos;
 
+import com.ems.client.enums.ERole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,11 @@ public class User {
     private String username;
     private String email;
     private String phone;
+
+    @JsonIgnore
     private String password;
+
+    private ERole role;
     public User(CreateOrUpdateUserDTO dto){
         this.firstName = dto.getFirstName();
         this.lastName = dto.getLastName();
@@ -24,5 +30,6 @@ public class User {
         this.phone = dto.getPhone();
         this.email = dto.getEmail();
         this.password = dto.getPassword();
+        this.role = dto.getRole();
     }
 }

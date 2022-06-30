@@ -17,4 +17,5 @@ public interface IUserService {
 
     User findByUserNameOrEmail(String username, String email);
 
+    User profile();
 }

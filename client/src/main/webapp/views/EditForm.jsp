@@ -102,6 +102,13 @@
                     <label>Password</label>
                     <input type="password" name="password" id="password" value="${employee.user.password}">
                 </div>
+                <div class="register-employee-container-sub">
+                    <label>ROLE</label>
+                    <select name="role">
+                        <option value="${employee.user.role}">${employee.user.role}</option>
+
+                    </select>
+                </div>
             </div>
             <button>Submit</button>
 

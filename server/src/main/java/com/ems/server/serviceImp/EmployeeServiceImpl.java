@@ -8,6 +8,7 @@ import com.ems.server.repository.IEmployeeRepository;
 import com.ems.server.services.IEmployeeService;
 import com.ems.server.services.IUserService;
 import com.ems.server.utils.ResourceNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Employee save(CreateOrUpdateEmployeeDTO dto) {
         User existingUser = userService.findById(dto.getUserId());
 
@@ -33,16 +35,19 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Employee findById(Long id) {
         return employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee with id " + id.toString() + " not found"));
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Employee update(CreateOrUpdateEmployeeDTO dto, Long id) {
         Employee existingEmployee = findById(id);
         existingEmployee.setUser(userService.findById(dto.getUserId()));
@@ -51,6 +56,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Employee remove(Long id) {
         Employee existingEmployee = findById(id);
         employeeRepository.delete(existingEmployee);
